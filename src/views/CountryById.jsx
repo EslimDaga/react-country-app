@@ -4,4 +4,4 @@ const CountryById = () => {
   )
 }
 
-export default CountryById
+export default CountryById;
