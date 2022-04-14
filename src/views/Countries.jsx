@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { SearchCircleIcon } from "@heroicons/react/solid";
 
 const Countries = () => {
-
+  const [listCountries, setListCountries] = useState([]);
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,9 +12,24 @@ const Countries = () => {
     axios.get("https://restcountries.com/v3.1/all")
       .then(({ data }) => {
         setCountries(data);
+        setListCountries(data);
         setLoading(false);
       });
   },[]);
+
+  const handleChange = (e) => {
+    filterCountry(e.target.value);
+  }
+
+  const filterCountry = (search_value) => {
+    let resultSearch = listCountries.filter((element) => {
+      return element.name.common
+        .toLowerCase()
+        .includes(search_value.toLowerCase());
+    });
+    console.log(resultSearch);
+    setCountries(resultSearch);
+  };
 
   return (
     <section className="flex-1 overflow-y-auto w-full">
@@ -24,6 +39,7 @@ const Countries = () => {
             type="text"
             className="w-full sm:w-64 md:w-64 lg:w-80 h-14 bg-white dark:bg-slate-800 placeholder:text-slate-400 dark:placeholder:text-slate-400 text-slate-700 dark:text-slate-400 pr-8 pl-11 rounded-lg z-0 focus:shadow focus:outline-none dark:focus:shadow dark:focus:outline-none font-Nunito-Sans font-semibold"
             placeholder="Search for a country…"
+            onChange={handleChange}
           />
           <div className="absolute top-4 left-3">
             <SearchCircleIcon className="w-6 h-6 text-gray-600 dark:text-slate-400" />
