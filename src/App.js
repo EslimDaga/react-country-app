@@ -1,8 +1,13 @@
-function App() {
+import { Route, Routes } from "react-router-dom";
+import Countries from "./views/Countries";
+import CountryById from "./views/CountryById";
+
+const App = () => {
   return (
-    <div className="App">
-      Hello
-    </div>
+    <Routes>
+      <Route path="/" element={<Countries />} />
+      <Route path="/country" element={<CountryById />} />
+    </Routes>
   );
 }
 
