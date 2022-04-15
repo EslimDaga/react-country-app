@@ -44,12 +44,9 @@ const CountryById = () => {
             borders: r.borders
           }
         })
-        //console.log(countryById)
         setCountry(countryById);
       })
   },[name])
-
-  //console.log(country);
 
   return (
     <section className="flex-1 overflow-y-auto w-full">
