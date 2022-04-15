@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { SearchCircleIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon, SearchCircleIcon } from "@heroicons/react/solid";
 
 const Countries = () => {
   const [listCountries, setListCountries] = useState([]);
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showOptions, setShowOptions] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -21,14 +22,29 @@ const Countries = () => {
     filterCountry(e.target.value);
   }
 
+  const handleSelect = (e) => {
+    filterRegion(e);
+    setShowOptions(false);
+  };
+
   const filterCountry = (search_value) => {
     let resultSearch = listCountries.filter((element) => {
       return element.name.common
         .toLowerCase()
         .includes(search_value.toLowerCase());
     });
-    console.log(resultSearch);
     setCountries(resultSearch);
+  };
+
+  const filterRegion = (search_value) => {
+    if(search_value === "all" || search_value === ""){
+      setCountries(listCountries);
+    }else{
+      let resultSearch = listCountries.filter((element) => {
+        return element.region.toLowerCase().includes(search_value.toLowerCase());
+      });
+      setCountries(resultSearch);
+    }
   };
 
   return (
@@ -37,7 +53,7 @@ const Countries = () => {
         <div className="relative pb-10 sm:pb-10 md:pb-0 lg:pb-0">
           <input
             type="text"
-            className="w-full sm:w-64 md:w-64 lg:w-80 h-14 bg-white dark:bg-slate-800 placeholder:text-slate-400 dark:placeholder:text-slate-400 text-slate-700 dark:text-slate-400 pr-8 pl-11 rounded-lg z-0 focus:shadow focus:outline-none dark:focus:shadow dark:focus:outline-none font-Nunito-Sans font-semibold"
+            className="w-full sm:w-64 md:w-64 lg:w-80 h-14 bg-white dark:bg-slate-800 placeholder:text-slate-800 dark:placeholder:text-white text-slate-700 dark:text-slate-400 pr-8 pl-11 rounded-lg z-0 focus:shadow focus:outline-none dark:focus:shadow dark:focus:outline-none font-Nunito-Sans font-semibold"
             placeholder="Search for a country…"
             onChange={handleChange}
           />
@@ -45,9 +61,82 @@ const Countries = () => {
             <SearchCircleIcon className="w-6 h-6 text-gray-600 dark:text-slate-400" />
           </div>
         </div>
-        <select name="" id="">
-          dasdasd
-        </select>
+        <div className="relative inline-block text-left">
+          <div>
+            <button
+              onClick={() => setShowOptions(!showOptions)}
+              type="button"
+              className="inline-flex justify-between items-center w-52 h-14 rounded-md shadow-sm pl-6 pr-5 py-2 bg-white dark:bg-slate-800 text-sm font-Nunito-Sans font-medium text-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-100 dark:focus:ring-offset-gray-900 dark:focus:ring-gray-900"
+              id="menu-button"
+              aria-expanded="true"
+              aria-haspopup="true"
+            >
+              Filter by Region
+              <ChevronDownIcon className="w-6" />
+            </button>
+          </div>
+          {showOptions ? (
+            <div
+              className="origin-top-right absolute right-0 mt-2 w-52 pl-2 pr-2 rounded-md shadow-lg bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="menu-button"
+            >
+              <div className="py-1" role="none">
+                <div
+                  onClick={() => handleSelect("all")}
+                  className="text-gray-700 dark:text-white hover:bg-gray-300 hover:dark:bg-slate-600 rounded-md block px-4 py-2 font-Nunito-Sans font-medium text-sm cursor-pointer"
+                  role="menuitem"
+                  id="menu-item-2"
+                >
+                  All
+                </div>
+                <div
+                  onClick={() => handleSelect("africa")}
+                  className="text-gray-700 dark:text-white hover:bg-gray-300 hover:dark:bg-slate-600 rounded-md block px-4 py-2 font-Nunito-Sans font-medium text-sm cursor-pointer"
+                  role="menuitem"
+                  id="menu-item-2"
+                >
+                  Africa
+                </div>
+                <div
+                  onClick={() => handleSelect("america")}
+                  className="text-gray-700 dark:text-white hover:bg-gray-300 hover:dark:bg-slate-600 rounded-md block px-4 py-2 font-Nunito-Sans font-medium text-sm cursor-pointer"
+                  role="menuitem"
+                  id="menu-item-2"
+                >
+                  America
+                </div>
+                <div
+                  onClick={() => handleSelect("asia")}
+                  className="text-gray-700 dark:text-white hover:bg-gray-300 hover:dark:bg-slate-600 rounded-md block px-4 py-2 font-Nunito-Sans font-medium text-sm cursor-pointer"
+                  role="menuitem"
+                  id="menu-item-2"
+                >
+                  Asia
+                </div>
+                <div
+                  onClick={() => handleSelect("europe")}
+                  className="text-gray-700 dark:text-white hover:bg-gray-300 hover:dark:bg-slate-600 rounded-md block px-4 py-2 font-Nunito-Sans font-medium text-sm cursor-pointer"
+                  role="menuitem"
+                  id="menu-item-2"
+                >
+                  Europe
+                </div>
+                <div
+                  onClick={() => handleSelect("oceania")}
+                  className="text-gray-700 dark:text-white hover:bg-gray-300 hover:dark:bg-slate-600 rounded-md w-full block px-4 py-2 font-Nunito-Sans font-medium text-sm cursor-pointer"
+                  role="menuitem"
+                  id="menu-item-2"
+                >
+                  Oceania
+                </div>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-0 sm:gap-x-0 md:gap-x-9 lg:gap-x-2 gap-y-6 sm:gap-y-6 md:gap-y-6 lg:gap-y-10 justify-items-center mx-6 sm:mx-6 md:mx-6 lg:mx-16">
         {loading ? (
@@ -56,9 +145,13 @@ const Countries = () => {
           countries.map((item) => (
             <div
               key={item.cca2}
-              className="w-full rounded-lg overflow-hidden shadow-lg bg-white dark:bg-slate-800"
+              className="w-full rounded-lg overflow-hidden shadow-lg bg-white dark:bg-slate-800 transform cursor-pointer"
             >
-              <img className="w-full" src={item.flags.svg} alt="Mountain" />
+              <img
+                className="w-full"
+                src={item.flags.svg}
+                alt={item.flags.svg}
+              />
               <div className="bg-white dark:bg-slate-800 px-6 pt-6">
                 <div className="font-Nunito-Sans font-extrabold text-lg mb-2 text-slate-800 dark:text-white">
                   {item.name.common}
