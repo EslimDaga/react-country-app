@@ -1,7 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ChevronDownIcon, SearchCircleIcon } from "@heroicons/react/solid";
-import { Link } from "react-router-dom";
 import SearchInput from "../components/Countries/SearchInput";
 import DropDownInput from "../components/Countries/DropDownInput";
 import CardCountry from "../components/Countries/CardCountry";
@@ -54,7 +52,7 @@ const Countries = () => {
   return (
     <section className="flex-1 overflow-y-auto w-full">
       <div className="block sm:block md:flex lg:flex justify-between mx-6 sm:mx-6 md:mx-6 lg:mx-16 pt-6 sm:pt-6 md:pt-12 lg:pt-12 pb-8 sm:pb-8 md:pb-12 lg:pb-12">
-        <SearchInput handleSelect={handleSelect} />
+        <SearchInput handleChange={handleChange} />
         <DropDownInput
           setShowOptions={setShowOptions}
           showOptions={showOptions}
