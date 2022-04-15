@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ChevronDownIcon, SearchCircleIcon } from "@heroicons/react/solid";
+import { Link } from "react-router-dom";
 
 const Countries = () => {
   const [listCountries, setListCountries] = useState([]);
@@ -143,7 +144,8 @@ const Countries = () => {
           <h1>Loading</h1>
         ) : (
           countries.map((item) => (
-            <div
+            <Link
+              to={`/country/${item.name.common}`}
               key={item.cca2}
               className="w-full rounded-lg overflow-hidden shadow-lg bg-white dark:bg-slate-800 cursor-pointer"
             >
@@ -181,7 +183,7 @@ const Countries = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))
         )}
       </div>
