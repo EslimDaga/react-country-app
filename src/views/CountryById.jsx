@@ -152,7 +152,7 @@ const CountryById = () => {
                 Border Countries:
               </h1>
               <div className="flex overflow-auto sm:flex md:flex lg:flex mt-4 sm:mt-4 md:mt-0 lg:mt-0">
-                {item.borders.map((b) => (
+                {item.borders && item.borders.map((b) => (
                   <div key={b} className="bg-white dark:bg-slate-800 py-1 px-7 rounded-md mr-2 shadow-lg">
                     <h1 className="font-Nunito-Sans font-light text-gray-900 dark:text-white">
                       {b}
