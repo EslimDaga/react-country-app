@@ -145,7 +145,7 @@ const Countries = () => {
           countries.map((item) => (
             <div
               key={item.cca2}
-              className="w-full rounded-lg overflow-hidden shadow-lg bg-white dark:bg-slate-800 transform cursor-pointer"
+              className="w-full rounded-lg overflow-hidden shadow-lg bg-white dark:bg-slate-800 cursor-pointer"
             >
               <img
                 className="w-full"
