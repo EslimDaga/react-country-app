@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import SearchInput from "../components/Countries/SearchInput";
 import DropDownInput from "../components/Countries/DropDownInput";
 import CardCountry from "../components/Countries/CardCountry";
+import Loading from "../assets/images/globe.gif";
 
 const Countries = () => {
   const [listCountries, setListCountries] = useState([]);
@@ -59,13 +60,17 @@ const Countries = () => {
           handleSelect={handleSelect}
         />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-0 sm:gap-x-0 md:gap-x-9 lg:gap-x-2 gap-y-6 sm:gap-y-6 md:gap-y-6 lg:gap-y-10 justify-items-center mx-6 sm:mx-6 md:mx-6 lg:mx-16">
-        {loading ? (
-          <h1>Loading</h1>
-        ) : (
-          countries.map((item) => <CardCountry item={item} key={item.cca2} />)
-        )}
-      </div>
+      {loading ? (
+        <div className="flex justify-center items-center">
+          <img src={Loading} alt="loader" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-0 sm:gap-x-0 md:gap-x-9 lg:gap-x-2 gap-y-6 sm:gap-y-6 md:gap-y-6 lg:gap-y-10 justify-items-center mx-6 sm:mx-6 md:mx-6 lg:mx-16">
+          {countries.map((item) => (
+            <CardCountry item={item} key={item.cca2} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }
