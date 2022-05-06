@@ -48,7 +48,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./src/assets/images/screenshot.png)
+![](./src/assets/images/image.png)
 
 ![](./src/assets/images/view_desktop_white.jpg)
 
@@ -65,6 +65,9 @@ Users should be able to:
 
 - [React](https://reactjs.org/) - JS library
 - [Tailwind ](https://tailwindcss.com/) - CSS framework
+
+### Deploy with
+- [Vercel](https://vercel.com/)
 
 ## Author 👨🏻‍💻
 
