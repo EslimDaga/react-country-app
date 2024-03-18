@@ -4,7 +4,7 @@ This is a solution to the [GitHub user search app challenge on Frontend Mentor](
 
 ![](./src/assets/images/preview_mobile.jpg)
 
-## Installation and Setup Instructions 💻
+## Installation and Setup Instructions 
 
 Clone down this repository. You will need `node` and `npm` installed globally on your machine.
 
